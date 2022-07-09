@@ -16,6 +16,7 @@ root                    (project root folder)
 ## Required Technologies
 ---
 * Python 3.10.2
+* RAYLIB STATIC 4.0.0.6
 
 ## Autors
 ---
