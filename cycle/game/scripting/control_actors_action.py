@@ -21,7 +21,7 @@ class ControlActorsAction(Action):
         self._keyboard = keyboard
         self._direction = Point(constants.CELL_SIZE, 0)
 
-    def execute(self, cast, script):
+    def execute_player1(self, cast, script):
         """Executes the control actors action.
         
         Args:
@@ -46,3 +46,29 @@ class ControlActorsAction(Action):
 
         player1_snake = cast.get_first_actor("player1")
         player1_snake.turn_head(self._direction)
+
+    def execute_player2(self, cast, script):
+        """Executes the control actors action.
+        
+        Args:
+            cast (Cast): the cast of Actors in the game.
+            script (Script): the script of Actions in the game.
+        """
+        # left
+        if self._keyboard.is_key_down("j"):
+            self._direction = Point(-constants.CELL_SIZE, 0)
+
+        # right
+        if self._keyboard.is_key_down("l"):
+            self._direction = Point(constants.CELL_SIZE, 0)
+
+        # up
+        if self._keyboard.is_key_down("i"):
+            self._direction = Point(0, -constants.CELL_SIZE)
+
+        # down
+        if self._keyboard.is_key_down("k"):
+            self._direction = Point(0, constants.CELL_SIZE)
+
+        player2_snake = cast.get_first_actor("player2")
+        player2_snake.turn_head(self._direction)

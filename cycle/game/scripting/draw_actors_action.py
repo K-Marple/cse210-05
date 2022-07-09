@@ -26,6 +26,7 @@ class DrawActorsAction(Action):
             script (Script): the script of Actions in the game.
         """
         score = cast.get_first_actor("scores")
+        food = cast.get_first_actor("foods")
         player1_snake = cast.get_first_actor("player1")
         player2_snake = cast.get_first_actor("player2")
         segments1 = player1_snake.get_segments()
@@ -33,8 +34,9 @@ class DrawActorsAction(Action):
         messages = cast.get_actors("messages")
 
         self._video.clear_buffer()
-        self._video.draw_actor(player1_snake)
+        self._video.draw_actor(food)
         self._video.draw_actors(segments1)
+        self._video.draw_actors(segments2)
         self._video.draw_actor(score)
         self._video.draw_actors(messages, True)
         self._video.flush_buffer()
