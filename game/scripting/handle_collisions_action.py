@@ -42,7 +42,7 @@ class HandleCollisionAction(Action):
         head2 = player2_snake.get_head()
 
         if player1_snake.get_position().equals(player2_snake.get_position()):
-            points = "help!"
+            points = 1
             player1_snake.grow_tail(points)
             player2_snake.grow_tail(points)
             score.add_points(points)
@@ -53,7 +53,7 @@ class HandleCollisionAction(Action):
         Args:
             cast (Cast): the cast of Actors in the game.
         """
-        snake = cast.get_first_actor("snakes")
+        snake = cast.get_first_actor("player1")
         head = snake.get_segments()[0]
         segments = snake.get_segments()[1:]
 
@@ -70,7 +70,7 @@ class HandleCollisionAction(Action):
         if self._is_game_over:
             player1_snake = cast.get_first_actor("player1")
             player2_snake = cast.get_first_actor("player2")
-            segments = snake.get_segments()
+            segments = player1_snake.get_segments()
 
             x = int(constants.MAX_X / 2)
             y = int(constants.MAX_Y / 2)
@@ -83,4 +83,4 @@ class HandleCollisionAction(Action):
 
             for segment in segments:
                 segment.set_color(constants.WHITE)
-            food.set_color(constants.WHITE)
+            player2_snake.set_color(constants.WHITE)
