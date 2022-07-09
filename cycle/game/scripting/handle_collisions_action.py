@@ -29,8 +29,8 @@ class HandleCollisionAction(Action):
             self._handle_segment_collision(cast)
             self._handle_game_over(cast)
 
-    def _handle_player_collision(self, cast):
-        """Updates the score if the snakes collide with each other.
+    def _handle_food_collision(self, cast):
+        """Updates the score and moves the food if a snake collides with it.
         
         Args:
             cast (Cast): the cast of Actors in the game.
@@ -42,11 +42,42 @@ class HandleCollisionAction(Action):
         head1 = player1_snake.get_head()
         head2 = player2_snake.get_head()
 
-        if player1_snake.get_position().equals(player2_snake.get_position()):
+        if head1.get_position().equals(food.get_position()):
             points = food.get_points()
             player1_snake.grow_tail(points)
-            player2_snake.grow_tail(points)
             score.add_points(points)
+            food.reset()
+        elif head2.get_position().equals(food.get_position()):
+            points = food.get_points()
+            player2_snake.grow_tail(points)
+            score.add_points()
+            food.reset()
+
+    def _handle_player_collision(self, cast):
+        """Updates the score if the snakes collide with each other.
+        
+        Args:
+            cast (Cast): the cast of Actors in the game.
+        """
+        score = cast.get_first_actor("scores")
+        player1_snake = cast.get_first_actor("player1")
+        player2_snake = cast.get_first_actor("player2")
+        head1 = player1_snake.get_head()
+        head2 = player2_snake.get_head()
+        segments1 = player1_snake.get_segments()[1:]
+        segments2 = player2_snake.get_segments()[1:]
+
+        for segment in segments1:
+            if head2.get_position().equals(segment.get_position()):
+                points = score.get_points()
+                player1_snake.grow_tail(points)
+                score.add_points(points)
+
+        for segment in segments2:
+            if head1.get_position().equals(segment.get_position()):
+                points = score.get_points()
+                player2_snake.grow_tail(points)
+                score.add_points(points)
 
     def _handle_segment_collision(self, cast):
         """Sets the game over flag if a snake collides with itself.
@@ -71,7 +102,9 @@ class HandleCollisionAction(Action):
         if self._is_game_over:
             player1_snake = cast.get_first_actor("player1")
             player2_snake = cast.get_first_actor("player2")
-            segments = player1_snake.get_segments()
+            segments1 = player1_snake.get_segments()
+            segments2 = player2_snake.get_segments()
+            food = cast.get_first_actor("foods")
 
             x = int(constants.MAX_X / 2)
             y = int(constants.MAX_Y / 2)
@@ -82,6 +115,6 @@ class HandleCollisionAction(Action):
             message.set_position(position)
             cast.add_actor("messages", message)
 
-            for segment in segments:
+            for segment in segments1 and segments2:
                 segment.set_color(constants.WHITE)
-            player2_snake.set_color(constants.WHITE)
+            food.set_color(constants.WHITE)

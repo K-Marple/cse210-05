@@ -25,3 +25,11 @@ class Score(Actor):
         """
         self._points += points
         self.set_text(f"Score: {self._points}")
+
+    def get_points(self):
+        """Gets the points the collision is worth.
+        
+        Returns:
+            points (int): the points the collision is worth.
+        """
+        return self._points

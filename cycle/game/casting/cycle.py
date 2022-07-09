@@ -65,9 +65,22 @@ class Cycle(Actor):
             text = "8" if i == 0 else "#"
             color = constants.YELLOW if i == 0 else constants.GREEN
 
-            segment = Actor()
-            segment.set_position(position)
-            segment.set_velocity(velocity)
-            segment.set_text(text)
-            segment.set_color(color)
-            self._segments.append(segment)
+            segment1 = Actor()
+            segment1.set_position(position)
+            segment1.set_velocity(velocity)
+            segment1.set_text(text)
+            segment1.set_color(color)
+            self._segments.append(segment1)
+
+        for j in range(constants.SNAKE_LENGTH):
+            position = Point(x - j * constants.CELL_SIZE, y)
+            velocity = Point(1 * constants.CELL_SIZE, 0)
+            text = "8" if i == 0 else "#"
+            color = constants.PURPLE if j == 0 else constants.BLUE
+
+            segment2 = Actor()
+            segment2.set_position(position)
+            segment2.set_velocity(velocity)
+            segment2.set_text(text)
+            segment2.set_color(color)
+            self._segments.append(segment2)

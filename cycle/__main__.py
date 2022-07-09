@@ -1,7 +1,7 @@
 import constants
 
 from game.casting.cast import Cast
-# from game.casting.food import Food
+from game.casting.food import Food
 from game.casting.score import Score
 from game.casting.cycle import Cycle
 
@@ -27,6 +27,7 @@ def main():
     cast.add_actor("player1", Cycle())
     cast.add_actor("player2", Cycle())
     cast.add_actor("scores", Score())
+    cast.add_actor("foods", Food())
 
     # start the game
     keyboard = Keyboard()
