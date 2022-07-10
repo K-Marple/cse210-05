@@ -37,7 +37,7 @@ class HandleCollisionAction(Action):
         Args:
             cast (Cast): the cast of Actors in the game.
         """
-        score = cast.get_first_actor("scores")
+        score1, score2 = cast.get_actors("scores")
         food = cast.get_first_actor("foods")
         snakes = cast.get_actors("snakes")
         player1_snake = snakes[0]
@@ -48,12 +48,12 @@ class HandleCollisionAction(Action):
         if head1.get_position().equals(food.get_position()):
             points = food.get_points()
             player1_snake.grow_tail(points)
-            score.add_points(points)
+            score1.add_points(points)
             food.reset()
         elif head2.get_position().equals(food.get_position()):
             points = food.get_points()
             player2_snake.grow_tail(points)
-            score.add_points()
+            score2.add_points()
             food.reset()
 
     def _handle_player_collision(self, cast):
@@ -62,7 +62,7 @@ class HandleCollisionAction(Action):
         Args:
             cast (Cast): the cast of Actors in the game.
         """
-        score = cast.get_first_actor("scores")
+        score1, score2 = cast.get_actors("scores")
         snakes = cast.get_actors("snakes")
         player1_snake = snakes[0]
         player2_snake = snakes[1]
@@ -73,15 +73,15 @@ class HandleCollisionAction(Action):
 
         for segment1 in segments1:
             if head2.get_position().equals(segment1.get_position()):
-                points = score.get_points()
+                points = score1.get_points()
                 player1_snake.grow_tail(points, constants.GREEN)
-                score.add_points(points)
+                score1.add_points(points)
 
         for segment2 in segments2:
             if head1.get_position().equals(segment2.get_position()):
-                points = score.get_points()
+                points = score2.get_points()
                 player2_snake.grow_tail(points, constants.BLUE)
-                score.add_points(points)
+                score2.add_points(points)
 
     def _handle_segment_collision(self, cast):
         """Sets the game over flag if a snake collides with itself.
@@ -128,6 +128,8 @@ class HandleCollisionAction(Action):
             message.set_position(position)
             cast.add_actor("messages", message)
 
-            for segment in segments1 and segments2:
+            for segment in segments1:
+                segment.set_color(constants.WHITE)
+            for segment in segments2:
                 segment.set_color(constants.WHITE)
             food.set_color(constants.WHITE)
