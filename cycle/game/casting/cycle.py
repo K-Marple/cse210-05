@@ -47,7 +47,6 @@ class Cycle(Actor):
             segment.set_position(position)
             segment.set_velocity(velocity)
             segment.set_text("#")
-            segment.set_color(constants.GREEN)
             self._segments.append(segment)
 
     def turn_head(self, velocity):
@@ -57,30 +56,31 @@ class Cycle(Actor):
     def _prepare_body(self):
         """Creates the body of the snake."""
         x = int(constants.MAX_X / 2)
-        y = int(constants.MAX_Y / 2)
+        y1 = int((constants.MAX_Y / 2) - 40)
+        y2 = int((constants.MAX_Y / 2) + 40)
 
         for i in range(constants.SNAKE_LENGTH):
-            position = Point(x - i * constants.CELL_SIZE, y)
-            velocity = Point(1 * constants.CELL_SIZE, 0)
-            text = "8" if i == 0 else "#"
-            color = constants.YELLOW if i == 0 else constants.GREEN
+            position1 = Point(x - i * constants.CELL_SIZE, y1)
+            velocity1 = Point(1 * constants.CELL_SIZE, 0)
+            text1 = "8" if i == 0 else "#"
+            color1 = constants.YELLOW if i == 0 else constants.GREEN
 
             segment1 = Actor()
-            segment1.set_position(position)
-            segment1.set_velocity(velocity)
-            segment1.set_text(text)
-            segment1.set_color(color)
+            segment1.set_position(position1)
+            segment1.set_velocity(velocity1)
+            segment1.set_text(text1)
+            segment1.set_color(color1)
             self._segments.append(segment1)
 
         for j in range(constants.SNAKE_LENGTH):
-            position = Point(x - j * constants.CELL_SIZE, y)
-            velocity = Point(1 * constants.CELL_SIZE, 0)
-            text = "8" if i == 0 else "#"
-            color = constants.PURPLE if j == 0 else constants.BLUE
+            position2 = Point(x - j * constants.CELL_SIZE, y2)
+            velocity2 = Point(1 * constants.CELL_SIZE, 0)
+            text2 = "8" if i == 0 else "#"
+            color2 = constants.PURPLE if j == 0 else constants.BLUE
 
             segment2 = Actor()
-            segment2.set_position(position)
-            segment2.set_velocity(velocity)
-            segment2.set_text(text)
-            segment2.set_color(color)
+            segment2.set_position(position2)
+            segment2.set_velocity(velocity2)
+            segment2.set_text(text2)
+            segment2.set_color(color2)
             self._segments.append(segment2)

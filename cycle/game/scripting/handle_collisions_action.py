@@ -72,12 +72,14 @@ class HandleCollisionAction(Action):
             if head2.get_position().equals(segment1.get_position()):
                 points = score.get_points()
                 player1_snake.grow_tail(points)
+                segment1.get_color(constants.GREEN)
                 score.add_points(points)
 
         for segment2 in segments2:
             if head1.get_position().equals(segment2.get_position()):
                 points = score.get_points()
                 player2_snake.grow_tail(points)
+                segment2.get_color(constants.BLUE)
                 score.add_points(points)
 
     def _handle_segment_collision(self, cast):
