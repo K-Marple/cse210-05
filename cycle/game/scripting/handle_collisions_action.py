@@ -25,6 +25,7 @@ class HandleCollisionAction(Action):
             script (Script): the script of Actions in the game.
         """
         if not self._is_game_over:
+            self._handle_food_collision(cast)
             self._handle_player_collision(cast)
             self._handle_segment_collision(cast)
             self._handle_game_over(cast)
@@ -67,14 +68,14 @@ class HandleCollisionAction(Action):
         segments1 = player1_snake.get_segments()[1:]
         segments2 = player2_snake.get_segments()[1:]
 
-        for segment in segments1:
-            if head2.get_position().equals(segment.get_position()):
+        for segment1 in segments1:
+            if head2.get_position().equals(segment1.get_position()):
                 points = score.get_points()
                 player1_snake.grow_tail(points)
                 score.add_points(points)
 
-        for segment in segments2:
-            if head1.get_position().equals(segment.get_position()):
+        for segment2 in segments2:
+            if head1.get_position().equals(segment2.get_position()):
                 points = score.get_points()
                 player2_snake.grow_tail(points)
                 score.add_points(points)
@@ -85,12 +86,19 @@ class HandleCollisionAction(Action):
         Args:
             cast (Cast): the cast of Actors in the game.
         """
-        snake = cast.get_first_actor("player1")
-        head = snake.get_segments()[0]
-        segments = snake.get_segments()[1:]
+        player1_snake = cast.get_first_actor("player1")
+        player2_snake = cast.get_first_actor("player2")
+        head1 = player1_snake.get_segments()[0]
+        head2 = player2_snake.get_segments()[0]
+        segments1 = player1_snake.get_segments()[1:]
+        segments2 = player2_snake.get_segments()[1:]
 
-        for segment in segments:
-            if head.get_position().equals(segment.get_position()):
+        for segment1 in segments1:
+            if head1.get_position().equals(segment1.get_position()):
+                self._is_game_over = True
+
+        for segment2 in segments2:
+            if head2.get_position().equals(segment2.get_position()):
                 self._is_game_over = True
 
     def _handle_game_over(self, cast):

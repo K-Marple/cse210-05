@@ -78,4 +78,4 @@ class Point:
         Returns:
             Point: a new point that is scaled.
         """
-        return Point(self._x, * factor, self._y * factor)
+        return Point(self._x * factor, self._y * factor)
