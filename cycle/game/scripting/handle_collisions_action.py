@@ -2,6 +2,7 @@ import constants
 from game.casting.actor import Actor
 from game.scripting.action import Action
 from game.shared.point import Point
+from game.shared.color import Color
 
 class HandleCollisionAction(Action):
     """An update action that handles interactions between the actors .
@@ -71,15 +72,13 @@ class HandleCollisionAction(Action):
         for segment1 in segments1:
             if head2.get_position().equals(segment1.get_position()):
                 points = score.get_points()
-                player1_snake.grow_tail(points)
-                segment1.get_color(constants.GREEN)
+                player1_snake.grow_tail(points, constants.GREEN)
                 score.add_points(points)
 
         for segment2 in segments2:
             if head1.get_position().equals(segment2.get_position()):
                 points = score.get_points()
-                player2_snake.grow_tail(points)
-                segment2.get_color(constants.BLUE)
+                player2_snake.grow_tail(points, constants.BLUE)
                 score.add_points(points)
 
     def _handle_segment_collision(self, cast):
