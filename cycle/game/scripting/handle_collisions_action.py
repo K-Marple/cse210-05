@@ -39,8 +39,9 @@ class HandleCollisionAction(Action):
         """
         score = cast.get_first_actor("scores")
         food = cast.get_first_actor("foods")
-        player1_snake = cast.get_first_actor("player1")
-        player2_snake = cast.get_first_actor("player2")
+        snakes = cast.get_actors("snakes")
+        player1_snake = snakes[0]
+        player2_snake = snakes[1]
         head1 = player1_snake.get_head()
         head2 = player2_snake.get_head()
 
@@ -62,8 +63,9 @@ class HandleCollisionAction(Action):
             cast (Cast): the cast of Actors in the game.
         """
         score = cast.get_first_actor("scores")
-        player1_snake = cast.get_first_actor("player1")
-        player2_snake = cast.get_first_actor("player2")
+        snakes = cast.get_actors("snakes")
+        player1_snake = snakes[0]
+        player2_snake = snakes[1]
         head1 = player1_snake.get_head()
         head2 = player2_snake.get_head()
         segments1 = player1_snake.get_segments()[1:]
@@ -87,8 +89,9 @@ class HandleCollisionAction(Action):
         Args:
             cast (Cast): the cast of Actors in the game.
         """
-        player1_snake = cast.get_first_actor("player1")
-        player2_snake = cast.get_first_actor("player2")
+        snakes = cast.get_actors("snakes")
+        player1_snake = snakes[0]
+        player2_snake = snakes[1]
         head1 = player1_snake.get_segments()[0]
         head2 = player2_snake.get_segments()[0]
         segments1 = player1_snake.get_segments()[1:]
@@ -109,8 +112,9 @@ class HandleCollisionAction(Action):
             cast (Cast): the cast of Actors in the game.
         """
         if self._is_game_over:
-            player1_snake = cast.get_first_actor("player1")
-            player2_snake = cast.get_first_actor("player2")
+            snakes = cast.get_actors("snakes")
+            player1_snake = snakes[0]
+            player2_snake = snakes[1]
             segments1 = player1_snake.get_segments()
             segments2 = player2_snake.get_segments()
             food = cast.get_first_actor("foods")

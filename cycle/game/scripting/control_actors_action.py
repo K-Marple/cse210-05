@@ -29,6 +29,8 @@ class ControlActorsAction(Action):
             cast (Cast): the cast of Actors in the game.
             script (Script): the script of Actions in the game.
         """
+        snakes = cast.get_actors("snakes")
+
         # for player 1
         # left
         if self._keyboard.is_key_down("a"):
@@ -46,8 +48,10 @@ class ControlActorsAction(Action):
         if self._keyboard.is_key_down("s"):
             self._direction1 = Point(0, constants.CELL_SIZE)
 
-        player1_snake = cast.get_first_actor("player1")
+        player1_snake = snakes[0]
         player1_snake.turn_head(self._direction1)
+
+        snakes = cast.get_actors("snakes")
 
         # for player 2
         # left
@@ -66,5 +70,5 @@ class ControlActorsAction(Action):
         if self._keyboard.is_key_down("k"):
             self._direction2 = Point(0, constants.CELL_SIZE)
 
-        player2_snake = cast.get_first_actor("player2")
+        player2_snake = snakes[1]
         player2_snake.turn_head(self._direction2)
