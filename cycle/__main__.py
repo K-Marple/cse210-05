@@ -1,3 +1,4 @@
+from pyray import create_physics_body_rectangle
 import constants
 
 from game.casting.cast import Cast
@@ -24,8 +25,8 @@ def main():
 
     # create the cast
     cast = Cast()
-    cast.add_actor("snakes", Cycle())
-    cast.add_actor("snakes", Cycle())
+    cast.add_actor("snakes", Cycle(constants.GREEN))
+    cast.add_actor("snakes", Cycle(constants.BLUE))
     cast.add_actor("scores", Score(Point(0, 0), "Player 1"))
     cast.add_actor("scores", Score(Point(750, 0), "Player 2"))
     cast.add_actor("foods", Food())
